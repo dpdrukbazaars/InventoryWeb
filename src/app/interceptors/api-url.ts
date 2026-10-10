@@ -3,7 +3,13 @@ import { HttpInterceptorFn } from '@angular/common/http';
 
 export const apiUrlInterceptor: HttpInterceptorFn = (req, next) => {
 
-  const backendUrl = 'https://inventoryapi-axqp.onrender.com';
+  const isLocal =
+  typeof window !== 'undefined' &&
+  ['localhost', '127.0.0.1'].includes(window.location.hostname);
+
+const backendUrl = isLocal
+  ? 'http://localhost:8080'
+  : 'https://inventoryapi-axqp.onrender.com';
 
   let apiPath: string | null = null;
 
